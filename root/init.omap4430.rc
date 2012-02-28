@@ -1,5 +1,4 @@
 import init.omap4430.usb.rc
-    start hwprops
 
 on init
     # Enable ADB hack
@@ -47,7 +46,9 @@ on fs
     mount ext4 /dev/block/platform/mmci-omap-hs.1/by-name/userdata /data wait noatime nosuid nodev errors=continue
     mount ext4 /dev/block/platform/mmci-omap-hs.1/by-name/cache /cache wait noatime nosuid nodev errors=continue
     mount ext4 /dev/block/platform/mmci-omap-hs.1/by-name/splash /dropbox wait noatime nosuid nodev errors=continue
-#    mount vfat /dev/block/platform/mmci-omap-hs.1/by-name/media /mnt/sdcard wait noatime nosuid nodev errors=continue
+
+    #mount vfat /dev/block/platform/mmci-omap-hs.1/by-name/media /mnt/sdcard wait noatime nosuid nodev errors=continue
+    
 
 # permissions for bluetooth.
 #    chown bluetooth bluetooth ro.bt.bdaddr_path

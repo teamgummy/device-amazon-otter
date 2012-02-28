@@ -35,7 +35,7 @@ DEVICE_PACKAGE_OVERLAYS := device/amazon/otter/overlay
 # we do this little trick to fall back to the hdpi version
 # if the xhdpi doesn't exist.
 PRODUCT_AAPT_CONFIG := normal mdpi hdpi
-PRODUCT_AAPT_PREF_CONFIG := hdpi
+PRODUCT_AAPT_PREF_CONFIG := mdpi
 
 PRODUCT_PACKAGES := \
     charger \
@@ -46,6 +46,7 @@ PRODUCT_PACKAGES += \
     lights.omap4 \
     libinvensense_mpl \
     hwcomposer.omap4 \
+    hwcomposer.default \
 
 
 #    audio_policy.omap4430
@@ -154,8 +155,8 @@ PRODUCT_COPY_FILES += \
 
 
 # Prebuilt /system/media
-PRODUCT_COPY_FILES += \
-    device/amazon/otter/prebuilt/media/bootanimation.zip:/system/media/bootanimation.zip \
+#PRODUCT_COPY_FILES += \
+#    device/amazon/otter/prebuilt/media/bootanimation.zip:/system/media/bootanimation.zip \
 
 
 # Prebuilt /system/usr
@@ -185,6 +186,7 @@ PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/imgtec/libsrv_um.so:/system/vendor/lib/libsrv_um.so \
     device/amazon/otter/prebuilt/imgtec/libusc.so:/system/vendor/lib/libusc.so \
     device/amazon/otter/prebuilt/imgtec/pvrsrvinit:/system/bin/pvrsrvinit \
+    device/amazon/otter/prebuilt/imgtec/pvrsrvctl:/system/bin/pvrsrvctl \
 
 FRAMEWORKS_BASE_SUBDIRS += \
     $(addsuffix /java, omapmmlib)
