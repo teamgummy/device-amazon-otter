@@ -98,10 +98,10 @@ PRODUCT_PACKAGES += \
     evtest
 
 
+# Misc
 PRODUCT_PACKAGES += \
     Superuser \
     su \
-    CMStats \
     hwprops \
 
 
@@ -152,6 +152,7 @@ PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/etc/media_profiles.xml:/system/etc/media_profiles.xml \
     device/amazon/otter/prebuilt/etc/vold.conf:/system/etc/vold.conf \
     device/amazon/otter/prebuilt/etc/vold.fstab:/system/etc/vold.fstab \
+    device/amazon/otter/prebuilt/etc/firmware/ducati-m3.bin:/system/etc/firmware/ducati-m3.bin \
 
 
 # Prebuilt /system/media

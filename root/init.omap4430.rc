@@ -2,7 +2,8 @@ import init.omap4430.usb.rc
 
 on init
     # Enable ADB hack
-    write /dev/usb_device_mode msc_adb
+    # write /dev/usb_device_mode msc_adb
+    setprop sys.usb.config mtp,adb
 
     # mount debugfs
     mount debugfs /sys/kernel/debug /sys/kernel/debug
@@ -42,12 +43,12 @@ on boot
 
 on fs
     log "==  init.omap4430.rc: on fs ------------------------"
-    mount ext4 /dev/block/platform/mmci-omap-hs.1/by-name/system /system wait ro
-    mount ext4 /dev/block/platform/mmci-omap-hs.1/by-name/userdata /data wait noatime nosuid nodev errors=continue
-    mount ext4 /dev/block/platform/mmci-omap-hs.1/by-name/cache /cache wait noatime nosuid nodev errors=continue
-    mount ext4 /dev/block/platform/mmci-omap-hs.1/by-name/splash /dropbox wait noatime nosuid nodev errors=continue
+    mount ext4 /dev/block/mmcblk0p9 /system wait ro
+    mount ext4 /dev/block/mmcblk0p10 /data wait noatime nosuid nodev errors=continue
+    mount ext4 /dev/block/mmcblk0p11 /cache wait noatime nosuid nodev errors=continue
+    mount ext4 /dev/block/mmcblk0p8 /dropbox wait noatime nosuid nodev errors=continue
 
-    #mount vfat /dev/block/platform/mmci-omap-hs.1/by-name/media /mnt/sdcard wait noatime nosuid nodev errors=continue
+    #mount vfat /dev/block/mmcblk0p12 /mnt/sdcard wait noatime nosuid nodev errors=continue
     
 
 # permissions for bluetooth.
@@ -77,10 +78,6 @@ on fs
 # Boost the CPU for 60 sec for boot optimization
     write /sys/devices/system/cpu/cpufreq/hotplug/boost_timeout 60000000
     write /sys/devices/system/cpu/cpu0/cpufreq/boost_cpufreq 1
-
-# Load Quota2 support modules
-    insmod /system/lib/modules/xt_qtaguid.ko
-    insmod /system/lib/modules/xt_quota2.ko
 
 # Allow everybody to read the xt_qtaguid resource tracking misc dev.
 # This is needed by any process that uses socket tagging.
@@ -121,10 +118,6 @@ on fs
     chown media media /data/base_image_sys_m3.xem3
     chown media media /data/base_image_app_m3.xem3
 
-    chmod 750 /system/bin/syslink_daemon.out
-    chmod 640 /data/base_image_sys_m3.xem3
-    chmod 640 /data/base_image_app_m3.xem3
-
     # change permissions for alsa nodes
     chmod 0777  /dev/snd/pcmC0D0c
     chmod 0777 /dev/snd/pcmC0D0p
@@ -147,16 +140,6 @@ on fs
     chmod 0777 /dev/video0
 
     # change permissions for Sensors
-#    chown system system /sys/bus/i2c/drivers/cma3000_accl/4-001c
-#    chown system system /sys/bus/i2c/drivers/cma3000_accl/4-001c/enable
-#    chown system system /sys/bus/i2c/drivers/cma3000_accl/4-001c/delay
-#    chown system system /sys/devices/platform/sfh7741.1
-#    chown system system /sys/devices/platform/sfh7741.1/state
-#    chown system system /sys/bus/i2c/drivers/bmp085/4-0077
-#    chown system system /sys/bus/i2c/drivers/bmp085/4-0077/enable
-#    chown system system /sys/bus/i2c/drivers/hmc5843/4-001e
-#    chown system system /sys/bus/i2c/drivers/hmc5843/4-001e/enable
-#    chown system system /sys/bus/i2c/drivers/hmc5843/4-001e/rate
     chown system system /sys/devices/virtual/input/input0/mode
     chmod 0770 /sys/devices/virtual/input/input0/mode
     chown system system /sys/devices/virtual/input/input0/delay
@@ -220,11 +203,6 @@ on fs
     chown system system /sys/class/leds/led-green/brightness
     chown system system /sys/class/leds/led-orange/brightness
 
-# Enable secondary display on Blaze
-    #write /sys/devices/platform/omapdss/display1/enabled 1
-    #write /sys/devices/platform/omapdss/overlay1/enabled 0
-    #write /sys/devices/platform/omapdss/overlay1/manager "2lcd"
-    #write /sys/devices/platform/omapdss/overlay1/enabled 1
 
 # Revert the boost_timeout to the default value of 3 sec. Note this won't affect the prev boost
 # request for boot time reduction
@@ -271,13 +249,6 @@ service pvrsrvinit /system/bin/pvrsrvinit
 	user root
 	group root
 	oneshot
-
-#Load IVA firmware
-service baseimage /system/bin/syslink_daemon.out -f /system/lib/ducati/base_image_sys_m3.xem3 /system/lib/ducati/base_image_app_m3.xem3
-	class core
-    critical
-    user media
-    group media
 
 # WLAN Related services
 service wlan_loader /system/bin/wlan_loader \
