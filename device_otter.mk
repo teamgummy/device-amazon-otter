@@ -25,7 +25,7 @@ else
 LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
-$(call inherit-product-if-exists, vendor/cm/config/common_full_tablet_wifionly.mk.mk)
+$(call inherit-product-if-exists, vendor/cm/config/common_full_tablet_wifionly.mk)
 $(call inherit-product-if-exists, vendor/amazon/otter/otter-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS := device/amazon/otter/overlay
@@ -46,7 +46,6 @@ PRODUCT_PACKAGES += \
     lights.omap4 \
     libinvensense_mpl \
     hwcomposer.omap4 \
-    hwcomposer.default \
 
 
 #    audio_policy.omap4430
@@ -171,7 +170,6 @@ PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/usr/keylayout/qtouch-touchscreen.kl:/system/usr/keylayout/qtouch-touchscreen.kl \
     device/amazon/otter/prebuilt/usr/keylayout/omap-keypad.kl:/system/usr/keylayout/omap-keypad.kl \
 
-#    device/amazon/otter/prebuilt/imgtec/pvrsrvctl:system/bin/pvrsrvctl \
 # Graphics
 PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/imgtec/gralloc.omap4.so:/system/vendor/lib/hw/gralloc.omap4.so \
