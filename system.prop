@@ -31,10 +31,13 @@ dalvik.vm.stack-trace-file=/data/anr/traces.txt
 #
 # CUSTOM
 #
-ro.config.disable_hw_accel=true
-persist.sys.usb.config=mass_storage,adb
+#ro.config.disable_hw_accel=true
+persist.sys.usb.config=mtp,adb
 wifi.supplicant_scan_interval=45
 ro.sf.hwrotation=270
 ro.ril.disable.power.collaspe=1
 pm.sleep_mode=1
+
+ro.rommanager.developerid=Hashcode
+ro.modversion=9.0.0-RC0-KFire
 
