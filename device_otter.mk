@@ -46,16 +46,17 @@ PRODUCT_PACKAGES += \
     lights.omap4 \
     libinvensense_mpl \
     hwcomposer.omap4 \
+    hwcomposer.default \
 
 
-#    audio_policy.omap4430
+#    audio.a2dp.default \
+#    audio.primary.omap4430 \
+#    audio_policy.default
 # Audio
 PRODUCT_PACKAGES += \
     libaudioutils \
-    audio.a2dp.default \
     libaudiohw_legacy \
-    audio.primary.omap4430 \
-    audio_policy.default
+
 
 # Audio
 PRODUCT_COPY_FILES += \
@@ -65,36 +66,36 @@ PRODUCT_COPY_FILES += \
     device/amazon/otter/audio/libaudiomodemgeneric.so:/system/lib/libaudiomodemgeneric.so \
     device/amazon/otter/audio/libaudiopolicy.so:/system/lib/libaudiopolicy.so \
 
+
 # Bluetooth configuration
-PRODUCT_COPY_FILES += \
-    system/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf
+#PRODUCT_COPY_FILES += \
+#    system/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf
+
 
 # Wifi
 PRODUCT_PACKAGES += \
-    libCustomWifi \
+    lib_driver_cmd_wl12xx \
     wlan_loader \
     wlan_cu \
     dhcpcd.conf \
-    wpa_supplicant.conf
+    wpa_supplicant.conf \
+    TQS_D_1.7.ini \
+    tiwlan.ini
 
+# TI-Connectivity
+PRODUCT_COPY_FILES += \
+    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-mr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-mr.bin \
+    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-plt.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-plt.bin \
+    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-sr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-sr.bin \
+    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl1271-nvs.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
+    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl1271-nvs_127x.bin:system/etc/firmware/ti-connectivity/wl1271-nvs_127x.bin \
 
 # HotSpot
-PRODUCT_PACKAGES += \
-    tiap_loader \
-    tiap_cu \
-    hostap \
-    hostapd.conf
-
-
-# Tests -- Can remove later
-PRODUCT_PACKAGES += \
-    d2c_test \
-    memmgr_test \
-    utils_test \
-    tiler_ptest \
-    overlay_test \
-    omx_tests \
-    evtest
+#PRODUCT_PACKAGES += \
+#    tiap_loader \
+#    tiap_cu \
+#    hostap \
+#    hostapd.conf
 
 
 # Misc
@@ -124,7 +125,7 @@ PRODUCT_COPY_FILES += \
 #   frameworks/base/data/etc/android.hardware.sensor.accelerometer.xml:/system/etc/permissions/android.hardware.sensor.accelerometer.xml \
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
-    device/amazon/otter/root/tablet_core_hardware.xml:/system/etc/permissions/tablet_core_hardware.xml \
+    device/amazon/otter/prebuilt/etc/permissions/tablet_core_hardware.xml:/system/etc/permissions/tablet_core_hardware.xml \
     frameworks/base/data/etc/android.hardware.wifi.xml:/system/etc/permissions/android.hardware.wifi.xml \
     frameworks/base/data/etc/android.hardware.sensor.light.xml:/system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:/system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
@@ -154,11 +155,6 @@ PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/etc/firmware/ducati-m3.bin:/system/etc/firmware/ducati-m3.bin \
 
 
-# Prebuilt /system/media
-#PRODUCT_COPY_FILES += \
-#    device/amazon/otter/prebuilt/media/bootanimation.zip:/system/media/bootanimation.zip \
-
-
 # Prebuilt /system/usr
 PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/usr/idc/ilitek_i2c.idc:/system/usr/idc/ilitek_i2c.idc \
@@ -170,31 +166,36 @@ PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/usr/keylayout/qtouch-touchscreen.kl:/system/usr/keylayout/qtouch-touchscreen.kl \
     device/amazon/otter/prebuilt/usr/keylayout/omap-keypad.kl:/system/usr/keylayout/omap-keypad.kl \
 
+
 # Graphics
 PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/imgtec/gralloc.omap4.so:/system/vendor/lib/hw/gralloc.omap4.so \
     device/amazon/otter/prebuilt/imgtec/libEGL_POWERVR_SGX540_120.so:/system/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so \
     device/amazon/otter/prebuilt/imgtec/libGLESv1_CM_POWERVR_SGX540_120.so:/system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so \
     device/amazon/otter/prebuilt/imgtec/libGLESv2_POWERVR_SGX540_120.so:/system/vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so \
-    device/amazon/otter/prebuilt/imgtec/libglslcompiler.so:/system/vendor/lib/libglslcompiler.so \
-    device/amazon/otter/prebuilt/imgtec/libIMGegl.so:/system/vendor/lib/libIMGegl.so \
-    device/amazon/otter/prebuilt/imgtec/libpvr2d.so:/system/vendor/lib/libpvr2d.so \
-    device/amazon/otter/prebuilt/imgtec/libpvrANDROID_WSEGL.so:/system/vendor/lib/libpvrANDROID_WSEGL.so \
-    device/amazon/otter/prebuilt/imgtec/libPVRScopeServices.so:/system/vendor/lib/libPVRScopeServices.so \
-    device/amazon/otter/prebuilt/imgtec/libsrv_init.so:/system/vendor/lib/libsrv_init.so \
-    device/amazon/otter/prebuilt/imgtec/libsrv_um.so:/system/vendor/lib/libsrv_um.so \
-    device/amazon/otter/prebuilt/imgtec/libusc.so:/system/vendor/lib/libusc.so \
+    device/amazon/otter/prebuilt/imgtec/libglslcompiler_SGX540_120.so:/system/vendor/lib/libglslcompiler_SGX540_120.so \
+    device/amazon/otter/prebuilt/imgtec/libIMGegl_SGX540_120.so:/system/vendor/lib/libIMGegl_SGX540_120.so \
+    device/amazon/otter/prebuilt/imgtec/libpvr2d_SGX540_120.so:/system/vendor/lib/libpvr2d_SGX540_120.so \
+    device/amazon/otter/prebuilt/imgtec/libpvrANDROID_WSEGL_SGX540_120.so:/system/vendor/lib/libpvrANDROID_WSEGL_SGX540_120.so \
+    device/amazon/otter/prebuilt/imgtec/libPVRScopeServices_SGX540_120.so:/system/vendor/lib/libPVRScopeServices_SGX540_120.so \
+    device/amazon/otter/prebuilt/imgtec/libsrv_init_SGX540_120.so:/system/vendor/lib/libsrv_init_SGX540_120.so \
+    device/amazon/otter/prebuilt/imgtec/libsrv_um_SGX540_120.so:/system/vendor/lib/libsrv_um_SGX540_120.so \
+    device/amazon/otter/prebuilt/imgtec/libusc_SGX540_120.so:/system/vendor/lib/libusc_SGX540_120.so \
     device/amazon/otter/prebuilt/imgtec/pvrsrvinit:/system/bin/pvrsrvinit \
     device/amazon/otter/prebuilt/imgtec/pvrsrvctl:/system/bin/pvrsrvctl \
+
 
 FRAMEWORKS_BASE_SUBDIRS += \
     $(addsuffix /java, omapmmlib)
 
+
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
+
 # still need to set english for audio init
 PRODUCT_LOCALES += en_US
+
 
 # copy all kernel modules under the "modules" directory to system/lib/modules
 PRODUCT_COPY_FILES += $(shell \
@@ -227,7 +228,7 @@ endif
 
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 $(call inherit-product, hardware/ti/omap4xxx/omap4.mk)
-$(call inherit-product, hardware/ti/wpan/ti-wpan-products.mk)
+#$(call inherit-product, hardware/ti/wpan/ti-wpan-products.mk)
 
 $(call inherit-product, build/target/product/full_base.mk)
 
