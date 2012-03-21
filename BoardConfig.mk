@@ -91,6 +91,7 @@ BOARD_HAVE_BLUETOOTH := true
 
 # Graphics
 BOARD_EGL_CFG := device/amazon/otter/prebuilt/etc/egl.cfg
+USE_OPENGL_RENDERER := true
 #MISSING_EGL_EXTERNAL_IMAGE := true
 #MISSING_GRALLOC_BUFFERS := true
 #MISSING_EGL_PIXEL_FORMAT_YV12 := true
