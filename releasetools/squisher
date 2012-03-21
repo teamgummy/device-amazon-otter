@@ -93,6 +93,11 @@ find ./ -name \*.apk | $XARGS $OPTICHARGER
 mv $REPACK/ota/system/vendor/lib/hw/hwcomposer.omap4.so $REPACK/ota/system/vendor/lib/hw/hwcomposer.omap4.so.old
 mv $REPACK/ota/system/lib/hw/hwcomposer.default.so $REPACK/ota/system/vendor/lib/hw/hwcomposer.omap4.so
 
+# Remove audio libs for now
+mv $REPACK/ota/system/lib/hw/audio.a2dp.default.so $REPACK/ota/system/lib/hw/audio.a2dp.default.so.bak
+mv $REPACK/ota/system/lib/hw/audio.primary.default.so $REPACK/ota/system/lib/hw/audio.primary.default.so.bak
+mv $REPACK/ota/system/lib/hw/audio.primary.omap4430.so $REPACK/ota/system/lib/hw/audio.primary.omap4430.so.bak
+
 # Remove unwanted apps
 rm $REPACK/ota/system/app/Camera.apk
 rm $REPACK/ota/system/app/Music.apk
