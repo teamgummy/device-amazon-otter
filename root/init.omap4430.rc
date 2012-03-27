@@ -56,6 +56,10 @@ on post-fs
     write /sys/devices/system/cpu/cpufreq/hotplug/boost_timeout 60000000
     write /sys/devices/system/cpu/cpu0/cpufreq/boost_cpufreq 1
 
+# Load Modules
+    insmod /system/lib/modules/omaplfb_sgx540_120.ko
+    insmod /system/lib/modules/pvrsrvkm_sgx540_120.ko
+
 # Allow everybody to read the xt_qtaguid resource tracking misc dev.
 # This is needed by any process that uses socket tagging.
     chmod 0644 /dev/xt_qtaguid
@@ -194,7 +198,7 @@ on post-fs
     chown system system /sys/class/graphics/fb1/overlays
 
 # Enable UI-Cloning Service in SystemServer
-    setprop tv.hdmi.uicloning.enable true
+#   setprop tv.hdmi.uicloning.enable true
 
 # Keypad permissions
     chmod 0444 /system/usr/keychars/omap-keypad.kcm.bin

@@ -169,7 +169,7 @@ PRODUCT_COPY_FILES += \
 
 # Graphics
 PRODUCT_COPY_FILES += \
-    device/amazon/otter/prebuilt/imgtec/gralloc.omap4.so:/system/vendor/lib/hw/gralloc.omap4.so \
+    device/amazon/otter/prebuilt/imgtec/gralloc.omap4430.so:/system/vendor/lib/hw/gralloc.omap4430.so \
     device/amazon/otter/prebuilt/imgtec/libEGL_POWERVR_SGX540_120.so:/system/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so \
     device/amazon/otter/prebuilt/imgtec/libGLESv1_CM_POWERVR_SGX540_120.so:/system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so \
     device/amazon/otter/prebuilt/imgtec/libGLESv2_POWERVR_SGX540_120.so:/system/vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so \
@@ -181,8 +181,9 @@ PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/imgtec/libsrv_init_SGX540_120.so:/system/vendor/lib/libsrv_init_SGX540_120.so \
     device/amazon/otter/prebuilt/imgtec/libsrv_um_SGX540_120.so:/system/vendor/lib/libsrv_um_SGX540_120.so \
     device/amazon/otter/prebuilt/imgtec/libusc_SGX540_120.so:/system/vendor/lib/libusc_SGX540_120.so \
-    device/amazon/otter/prebuilt/imgtec/pvrsrvinit:/system/bin/pvrsrvinit \
+    device/amazon/otter/prebuilt/imgtec/pvrsrvinit_SGX540_120:/system/bin/pvrsrvinit \
     device/amazon/otter/prebuilt/imgtec/pvrsrvctl:/system/bin/pvrsrvctl \
+    device/amazon/otter/prebuilt/imgtec/powervr.ini:/system/etc/powervr.ini \
 
 
 FRAMEWORKS_BASE_SUBDIRS += \
