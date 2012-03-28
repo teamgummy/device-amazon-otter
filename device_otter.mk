@@ -103,6 +103,7 @@ PRODUCT_PACKAGES += \
     Superuser \
     su \
     hwprops \
+    evtest \
 
 
 PRODUCT_PACKAGES += \
@@ -158,10 +159,11 @@ PRODUCT_COPY_FILES += \
 # Prebuilt /system/usr
 PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/usr/idc/ilitek_i2c.idc:/system/usr/idc/ilitek_i2c.idc \
-    device/amazon/otter/prebuilt/usr/keylayout/twl4030_pwrbutton.kl:/system/usr/keylayout/twl4030_pwrbutton.kl \
+    device/amazon/otter/prebuilt/usr/idc/twl6030_pwrbutton.idc:/system/usr/idc/twl6030_pwrbutton.idc \
     device/amazon/otter/prebuilt/usr/idc/omap-keypad.idc:/system/usr/idc/omap-keypad.idc \
     device/amazon/otter/prebuilt/usr/keychars/qtouch-touchscreen.kcm:/system/usr/keychars/qtouch-touchscreen.kcm \
     device/amazon/otter/prebuilt/usr/keychars/omap-keypad.kcm:/system/usr/keychars/omap-keypad.kcm \
+    device/amazon/otter/prebuilt/usr/keylayout/twl6030_pwrbutton.kl:/system/usr/keylayout/twl6030_pwrbutton.kl \
     device/amazon/otter/prebuilt/usr/keylayout/AVRCP.kl:/system/usr/keylayout/AVRCP.kl \
     device/amazon/otter/prebuilt/usr/keylayout/qtouch-touchscreen.kl:/system/usr/keylayout/qtouch-touchscreen.kl \
     device/amazon/otter/prebuilt/usr/keylayout/omap-keypad.kl:/system/usr/keylayout/omap-keypad.kl \
