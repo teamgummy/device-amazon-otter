@@ -16,9 +16,10 @@
 
 # This variable is set first, so it can be overridden
 # by BoardConfigVendor.mk
+BOARD_USES_GENERIC_AUDIO := false
 USE_CAMERA_STUB := true
-#BIONIC_ICS := true
 BOARD_HAVE_FAKE_GPS := true
+BOARD_HAVE_BLUETOOTH := false
 
 # Use the non-open-source parts, if they're present
 -include vendor/amazon/otter/BoardConfigVendor.mk
@@ -30,16 +31,11 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_ARCH_VARIANT := armv7-a-neon
 ARCH_ARM_HAVE_TLS_REGISTER := true
-#NEEDS_ARM_ERRATA_754319_754320 := true
-#TARGET_GLOBAL_CFLAGS += -DNEEDS_ARM_ERRATA_754319_754320
-#BOARD_NEEDS_CUTILS_LOG := true
-
 
 # Kernel
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 4096
-#BOARD_KERNEL_CMDLINE := console=ttyO2,115200n8 mem=463M@0x80000000 init=/init vram=5M omapfb.vram=0:5M
-BOARD_KERNEL_CMDLINE := androidboot.console=ttyO2 console=ttyO2,115200n8 mem=512M@0x80000000 init=/init vram=32M omapfb.vram=0:16M
+BOARD_KERNEL_CMDLINE := mem=512M console=ttyO2,115200n8 vram=24M omapfb.vram=0:8M def_disp=lcd2
 TARGET_NO_RADIOIMAGE := true
 TARGET_BOARD_PLATFORM := omap4
 TARGET_NO_BOOTLOADER := true
@@ -48,9 +44,8 @@ TARGET_BOARD_INFO_FILE := device/amazon/otter/board-info.txt
 TARGET_PREBUILT_KERNEL := device/amazon/otter/kernel
 TARGET_PROVIDES_INIT_RC := true
 BOARD_HAS_SDCARD_INTERNAL := true
-BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/platform/mmci-omap-hs.1/by-name/media
-BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/platform/mmci-omap-hs.1/by-name/media
-
+BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/platform/omap/omap_hsmmc.1/by-name/media
+BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/platform/omap/omap_hsmmc.1/by-name/media
 
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -59,11 +54,14 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16777216
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 536870912
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 1192230912
 BOARD_FLASH_BLOCK_SIZE := 4096
+BOARD_VOLD_MAX_PARTITIONS := 32
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
 # Connectivity - Wi-Fi
-#USES_TI_MAC80211 := true
+USES_TI_MAC80211 := true
 ifdef USES_TI_MAC80211
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+#BOARD_WPA_SUPPLICANT_DRIVER      := WEXT
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
 BOARD_HOSTAPD_DRIVER             := NL80211
@@ -73,45 +71,16 @@ BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
 WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wl12xx_sdio.ko"
 WIFI_DRIVER_MODULE_NAME          := "wl12xx_sdio"
 WIFI_FIRMWARE_LOADER             := ""
+#WIFI_DRIVER_FW_PATH_PARAM       := "/sys/module/wlan/parameters/fwpath"
+WIFI_DRIVER_FW_PATH_STA          := "/system/etc/firmware/ti-connectivity/wl127x-fw-4-sr.bin"
+WIFI_DRIVER_FW_PATH_P2P          := "/system/etc/firmware/ti-connectivity/wl127x-fw-4-plt.bin"
+WIFI_DRIVER_FW_PATH_AP           := "/system/etc/firmware/ti-connectivity/wl127x-fw-4-mr.bin"
 COMMON_GLOBAL_CFLAGS += -DUSES_TI_MAC80211
 endif
-
-
-# Audio
-BOARD_USES_GENERIC_AUDIO := false
-BOARD_USES_AUDIO_LEGACY := true
-ifdef BOARD_USES_AUDIO_LEGACY
-COMMON_GLOBAL_CFLAGS += -DBOARD_USES_AUDIO_LEGACY
-endif
-
-
-# Bluetooth
-BOARD_HAVE_BLUETOOTH := true
-
 
 # Graphics
 BOARD_EGL_CFG := device/amazon/otter/prebuilt/etc/egl.cfg
 USE_OPENGL_RENDERER := true
-#MISSING_EGL_EXTERNAL_IMAGE := true
-#MISSING_GRALLOC_BUFFERS := true
-#MISSING_EGL_PIXEL_FORMAT_YV12 := true
-#COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_GRALLOC_BUFFERS -DMISSING_EGL_PIXEL_FORMAT_YV12
-
-
-# OMX
-HARDWARE_OMX := true
-ifdef HARDWARE_OMX
-OMX_JPEG := true
-OMX_VENDOR := ti
-OMX_VENDOR_INCLUDES := \
-  hardware/ti/omx/system/src/openmax_il/omx_core/inc \
-  hardware/ti/omx/image/src/openmax_il/jpeg_enc/inc
-OMX_VENDOR_WRAPPER := TI_OMX_Wrapper
-BOARD_OPENCORE_LIBRARIES := libOMX_Core
-BOARD_OPENCORE_FLAGS := -DHARDWARE_OMX=1
-endif
-LEGACY_DOMX := true
-
 
 # OMAP
 OMAP_ENHANCEMENT := true
@@ -119,21 +88,11 @@ ifdef OMAP_ENHANCEMENT
 COMMON_GLOBAL_CFLAGS += -DOMAP_ENHANCEMENT -DTARGET_OMAP4
 endif
 
-
 # OTA Packaging
-# device-specific extensions to the updater binary
-#TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_otter
-#TARGET_RELEASETOOLS_EXTENSIONS := device/amazon/otter/releastools
 TARGET_PROVIDES_RELEASETOOLS := true
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/amazon/otter/releasetools/otter_ota_from_target_files
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := device/amazon/otter/releasetools/otter_img_from_target_files
 TARGET_CUSTOM_RELEASETOOL := ./device/amazon/otter/releasetools/squisher
-
-
-# Storage
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
-BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0/file
-
 
 # Recovery
 TARGET_PREBUILT_RECOVERY_KERNEL := device/amazon/otter/recovery-kernel
@@ -143,9 +102,8 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 TARGET_RECOVERY_UI_LIB := librecovery_ui_otter
 
-
 # Misc.
 BOARD_NEEDS_CUTILS_LOG := true
-BOARD_USES_SECURE_SERVICES := true
+#BOARD_USES_SECURE_SERVICES := true
 BOARD_LIB_DUMPSTATE := libdumpstate.otter
 BOARD_USE_LEGACY_TOUCHSCREEN := true

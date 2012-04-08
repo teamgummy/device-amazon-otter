@@ -1,21 +1,24 @@
-# Inherit device configuration for Kindle Fire
-$(call inherit-product, device/amazon/otter/full_otter.mk)
-
-# Inherit some common cyanogenmod stuff.
-$(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
-
-# Inherit some common CM stuff.
-#$(call inherit-product, vendor/cm/config/gsm.mk)
-
 #
 # Setup device specific product configuration.
 #
+
+# Inherit some common cyanogenmod stuff.
+$(call inherit-product-if-exists, vendor/cm/config/common_full_tablet_wifionly.mk)
+
+# Inherit device configuration for Kindle Fire
+$(call inherit-product, device/amazon/otter/full_otter.mk)
+
 PRODUCT_NAME := cm_otter
-PRODUCT_BRAND := Android
+PRODUCT_BRAND := amazon
 PRODUCT_DEVICE := otter
-PRODUCT_MODEL := Amazon Kindle Fire
+PRODUCT_DEVICE_PREFIX := amz
+PRODUCT_MODEL := KindleFire
 PRODUCT_MANUFACTURER := Amazon
-PRODUCT_SFX := ics
+ANDROID_VERSION := 4.0.4_r1.1
+DEVELOPER_NAME := hashcode
+DEVELOPER_HOST := hashcode-unn
+DEVELOPMENT_STAGE := Alpha
+TARGET_BOOTANIMATION_NAME := vertical-540x960
 
 # Release name and versioning
 PRODUCT_RELEASE_NAME := KFire
@@ -24,20 +27,17 @@ UTC_DATE := $(shell date +%s)
 DATE := $(shell date +%Y%m%d)
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-   BUILD_ID=6.2.1_G1011999 \
-   PRODUCT_NAME=${PRODUCT_DEVICE}_${PRODUCT_SFX} \
+   PRODUCT_NAME=${PRODUCT_DEVICE} \
    BUILD_NUMBER=${DATE} \
-   TARGET_DEVICE=amz_otter \
-   BUILD_DISPLAY_ID=6.2.1_G1011999 \
-   BUILD_FINGERPRINT=amazon/otter_ics/amz_otter:4.0.3/6.2.2/${BUILD_NUMBER}:user/release-keys \
-   PRIVATE_BUILD_DESC="amz_otter-user 4.0.3 6.2.2 "${BUILD_NUMBER}" release-keys" \
-   PRODUCT_BRAND=verizon \
-   BUILD_UTC_DATE= \
+   TARGET_DEVICE=${PRODUCT_DEVICE_PREFIX}_${PRODUCT_DEVICE} \
    TARGET_BUILD_TYPE=user \
    BUILD_VERSION_TAGS=release-keys \
-   USER=hashcode \
-   BUILD_HOST=hashcode-unn \
+   BUILD_DISPLAY_ID=ICS_${DEVELOPMENT_STAGE}_${BUILD_ID} \
+   BUILD_FINGERPRINT=${PRODUCT_BRAND}/${PRODUCT_DEVICE}/${PRODUCT_DEVICE_PREFIX}_${PRODUCT_DEVICE}:${ANDROID_VERSION}/${BUILD_ID}/${DATE}:user/release-keys \
+   PRIVATE_BUILD_DESC="${PRODUCT_DEVICE_PREFIX}_${PRODUCT_DEVICE}-user ${ANDROID_VERSION} ${BUILD_ID} ${DATE} release-keys" \
+   PRODUCT_BRAND=${PRODUCT_BRAND} \
+   USER=${DEVELOPER_NAME} \
+   BUILD_HOST=${DEVELOPER_HOST} \
    PRODUCT_DEFAULT_LANGUAGE=en \
    PRODUCT_DEFAULT_REGION=US \
-
 

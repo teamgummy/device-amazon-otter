@@ -1,9 +1,6 @@
 import init.omap4430.usb.rc
 
 on init
-    # Enable ADB hack
-    #setprop sys.usb.config mtp,adb
-
     # mount debugfs
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     export DOWNLOAD_CACHE /cache/download
@@ -28,13 +25,7 @@ on fs
     mount ext4 /dev/block/mmcblk0p11 /cache wait noatime nosuid nodev errors=continue
     mount ext4 /dev/block/mmcblk0p8 /dropbox wait noatime nosuid nodev errors=continue
 
-    #mount vfat /dev/block/mmcblk0p12 /mnt/sdcard wait noatime nosuid nodev errors=continue
-
 on post-fs
-
-# permissions for bluetooth.
-#    chown bluetooth bluetooth ro.bt.bdaddr_path
-
     # forget what this fixed
     mkdir /data/tmp 0777 system system
     symlink /data/tmp /tmp
@@ -59,6 +50,10 @@ on post-fs
 # Load Modules
     insmod /system/lib/modules/pvrsrvkm_sgx540_120.ko
     insmod /system/lib/modules/omaplfb_sgx540_120.ko
+    insmod /system/lib/modules/compat.ko
+    insmod /system/lib/modules/cfg80211.ko
+    insmod /system/lib/modules/mac80211.ko
+    insmod /system/lib/modules/wl12xx.ko
 
 # Allow everybody to read the xt_qtaguid resource tracking misc dev.
 # This is needed by any process that uses socket tagging.
@@ -94,10 +89,6 @@ on post-fs
     chmod 444 /dev/omap-devh0
     chmod 444 /dev/omap-devh1
     chmod 444 /dev/omap-devh2
-
-    chown media media /system/bin/syslink_daemon.out
-    chown media media /data/base_image_sys_m3.xem3
-    chown media media /data/base_image_app_m3.xem3
 
     # change permissions for alsa nodes
     chmod 0777  /dev/snd/pcmC0D0c
@@ -229,15 +220,6 @@ on boot
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
 
-# phone
-#    setprop ro.telephony.call_ring.multiple 0
-
-on property:persist.service.adb.enable=1
-    start adbd
-
-on property:persist.service.adb.enable=0
-    stop adbd
-
 service hwprops /sbin/hwprops
     critical
     disabled
@@ -245,10 +227,10 @@ service hwprops /sbin/hwprops
 
 # Initialize the SGX driver
 service pvrsrvinit /system/bin/pvrsrvinit
-	class core
-	user root
-	group root
-	oneshot
+    class core
+    user root
+    group root
+    oneshot
 
 # WLAN Related services
 service wpa_supplicant /system/bin/wpa_supplicant -Dnl80211 -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf -dd
@@ -272,40 +254,10 @@ service iprenew_eth0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service hfag /system/bin/sdptool add --channel=10 HFAG
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service hsag /system/bin/sdptool add --channel=11 HSAG
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service opush /system/bin/sdptool add --channel=12 OPUSH
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service pbap /system/bin/sdptool add --channel=19 PBAP
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
 service watchdog /sbin/watchdog
     user root
     oneshot
 
-service touch_firmware /system/bin/touch_firmware.sh
-    disabled
-    oneshot
-
 on property:sys.boot_completed=1
     log "== init.omap4430.rc: on property:sys.boot_completed=1 -----------------------"
-    start printboottime
-    start touch_firmware
-    start adobe_air
+
