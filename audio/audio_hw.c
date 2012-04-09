@@ -222,7 +222,7 @@
 #define PRODUCT_DEVICE_PROPERTY "ro.product.device"
 #define PRODUCT_DEVICE_BLAZE    "blaze"
 #define PRODUCT_DEVICE_TABLET   "blaze_tablet"
-#define PRODUCT_DEVICE_KC1   "amz_otter"
+#define PRODUCT_DEVICE_KC1      "otter"
 
 enum supported_boards {
     BLAZE,
