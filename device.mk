@@ -58,11 +58,9 @@ PRODUCT_PACKAGES += \
 
 # TI-Connectivity
 PRODUCT_COPY_FILES += \
-    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-mr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-mr.bin \
-    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-plt.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-plt.bin \
-    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-sr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-sr.bin \
-    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl1271-nvs.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
-    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl1271-nvs_127x.bin:system/etc/firmware/ti-connectivity/wl1271-nvs_127x.bin \
+    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl12xx_wlan_wl1271-fw-r4sp1-multirole-plt.bin:system/etc/firmware/ti-connectivity/wl1271-fw-multirole-plt.bin \
+    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl12xx_wlan_wl1271-fw-r4sp1-multirole-roc.bin:system/etc/firmware/ti-connectivity/wl1271-fw-multirole-roc.bin \
+    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl12xx_wlan_wl1271-nvs_127x.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
 
 
 # Misc
@@ -91,7 +89,6 @@ PRODUCT_COPY_FILES += \
     device/amazon/otter/root/ueventd.rc:/root/ueventd.rc
 
 
-#   frameworks/base/data/etc/android.hardware.sensor.accelerometer.xml:/system/etc/permissions/android.hardware.sensor.accelerometer.xml \
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/etc/permissions/tablet_core_hardware.xml:/system/etc/permissions/tablet_core_hardware.xml \
@@ -141,6 +138,11 @@ PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/usr/keylayout/omap-keypad.kl:/system/usr/keylayout/omap-keypad.kl \
 
 
+# Prebuilt /system/lib
+PRODUCT_COPY_FILES += \
+    device/amazon/otter/prebuilt/lib/sensors.otter.so:/system/lib/sensors.otter.so \
+
+
 # Graphics
 PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/imgtec/gralloc.omap4430.so:/system/vendor/lib/hw/gralloc.omap4430.so \
@@ -164,7 +166,9 @@ PRODUCT_PROPERTY_OVERRIDES := \
     ro.sf.lcd_density=160 \
     dalvik.vm.heapstartsize=5m \
     dalvik.vm.heapgrowthlimit=48m \
-    dalvik.vm.heapsize=128m
+    dalvik.vm.heapsize=128m \
+    wifi.interface=wlan0 \
+    wifi.supplicant_scan_interval=45
 
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 
