@@ -140,7 +140,7 @@ PRODUCT_COPY_FILES += \
 
 # Prebuilt /system/lib
 PRODUCT_COPY_FILES += \
-    device/amazon/otter/prebuilt/lib/sensors.otter.so:/system/lib/sensors.otter.so \
+    device/amazon/otter/prebuilt/lib/sensors.otter.so:/system/lib/hw/sensors.otter.so \
 
 
 # Graphics
@@ -168,7 +168,9 @@ PRODUCT_PROPERTY_OVERRIDES := \
     dalvik.vm.heapgrowthlimit=48m \
     dalvik.vm.heapsize=128m \
     wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=45
+    wifi.supplicant_scan_interval=45 \
+    ro.sf.hwrotation=270 \
+    ro.opengles.version=131072
 
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 
