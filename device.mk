@@ -36,7 +36,7 @@ PRODUCT_AAPT_PREF_CONFIG := mdpi
 
 # Hardware HALs
 PRODUCT_PACKAGES += \
-    lights.omap4 \
+    lights.otter \
     libinvensense_mpl \
     hwcomposer.omap4 \
     hwcomposer.default \
@@ -170,7 +170,9 @@ PRODUCT_PROPERTY_OVERRIDES := \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=45 \
     ro.sf.hwrotation=270 \
-    ro.opengles.version=131072
+    ro.opengles.version=131072 \
+    persist.lab126.chargeprotect=1
+
 
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 
