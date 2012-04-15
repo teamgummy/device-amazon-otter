@@ -58,10 +58,10 @@ PRODUCT_PACKAGES += \
 
 # TI-Connectivity
 PRODUCT_COPY_FILES += \
-    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl12xx_wlan_wl1271-fw-r4sp1-multirole-plt.bin:system/etc/firmware/ti-connectivity/wl1271-fw-multirole-plt.bin \
-    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl12xx_wlan_wl1271-fw-r4sp1-multirole-roc.bin:system/etc/firmware/ti-connectivity/wl1271-fw-multirole-roc.bin \
-    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl12xx_wlan_wl1271-nvs_127x.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
-
+        device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-mr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-mr.bin \
+        device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-plt.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-plt.bin \
+        device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-sr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-sr.bin \
+        device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl1271-nvs_127x.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
 
 # Misc
 PRODUCT_PACKAGES += \
@@ -86,7 +86,9 @@ PRODUCT_COPY_FILES += \
     device/amazon/otter/root/init.omap4430.rc:/root/init.omap4430.rc \
     device/amazon/otter/root/init.omap4430.usb.rc:/root/init.omap4430.usb.rc \
     device/amazon/otter/root/ueventd.omap4430.rc:/root/ueventd.omap4430.rc \
-    device/amazon/otter/root/ueventd.rc:/root/ueventd.rc
+    device/amazon/otter/root/ueventd.rc:/root/ueventd.rc \
+    device/amazon/otter/root/omaplfb_sgx540_120.ko:/root/modules/omaplfb_sgx540_120.ko \
+    device/amazon/otter/root/pvrsrvkm_sgx540_120.ko:/root/modules/pvrsrvkm_sgx540_120.ko \
 
 
 # These are the hardware-specific features
