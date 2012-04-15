@@ -2,7 +2,7 @@
 # Setup device specific product configuration.
 #
 
-TARGET_BOOTANIMATION_NAME := horizontal-1024x600
+TARGET_BOOTANIMATION_NAME := vertical-540x960
 
 # Inherit some common cyanogenmod stuff.
 $(call inherit-product-if-exists, vendor/cm/config/common_full_tablet_wifionly.mk)
@@ -16,6 +16,4 @@ PRODUCT_BRAND := Android
 PRODUCT_MODEL := Amazon Kindle Fire
 PRODUCT_MANUFACTURER := Amazon
 PRODUCT_RELEASE_NAME := KFire
-
-
 
