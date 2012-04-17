@@ -8,6 +8,7 @@ on init
     mkdir /mnt/sdcard 0000 system system
     # for backwards compatibility
     symlink /mnt/sdcard /sdcard
+    # turn on DOMX debug
 
 # power management
 # Enable off mode by default
@@ -80,23 +81,19 @@ on post-fs
     chown media media /dev/omap-devh1
     chown media media /dev/omap-devh2
 
-    chmod 666 /dev/syslink-proc4430
-    chmod 666 /dev/syslink-procmgr
-    chmod 666 /dev/syslink_ipc
-    chmod 444 /dev/omap-rproc0
-    chmod 444 /dev/omap-rproc1
-    chmod 444 /dev/omap-rproc2
-    chmod 444 /dev/iovmm-omap0
-    chmod 444 /dev/iovmm-omap1
-    chmod 444 /dev/omap-devh0
-    chmod 444 /dev/omap-devh1
-    chmod 444 /dev/omap-devh2
+    chmod 666 /dev/dce
+    chmod 666 /dev/ion
+    chmod 666 /dev/i2c-1
+    chmod 666 /dev/i2c-2
+    chmod 666 /dev/i2c-3
+    chmod 666 /dev/i2c-4
+    chmod 666 /dev/mtp_usb
 
     # change permissions for alsa nodes
-    chmod 0777  /dev/snd/pcmC0D0c
+    chmod 0777 /dev/snd/pcmC0D0c
     chmod 0777 /dev/snd/pcmC0D0p
-    chmod 0777  /dev/snd/controlC0
-    chmod 0777  /dev/snd/timer
+    chmod 0777 /dev/snd/controlC0
+    chmod 0777 /dev/snd/timer
 
     #change permissions for alsa nodes for audio modem
     chmod 0777 /dev/snd/pcmC0D5c
@@ -115,9 +112,9 @@ on post-fs
 
     # change permissions for Sensors
     chown system system /sys/devices/virtual/input/input0/mode
-    chmod 0770 /sys/devices/virtual/input/input0/mode
+    chmod 0771 /sys/devices/virtual/input/input0/mode
     chown system system /sys/devices/virtual/input/input0/delay
-    chmod 0770 /sys/devices/virtual/input/input0/delay
+    chmod 0771 /sys/devices/virtual/input/input0/delay
 
     # change permissions for Thermal sensor TMP105
     chmod 0777 /sys/class/hwmon/hwmon0/device/temp1_max

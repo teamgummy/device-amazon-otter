@@ -75,7 +75,8 @@ PRODUCT_PACKAGES += \
     make_ext4fs \
     setup_fs \
     dhcpcd.conf \
-    calibrator
+    calibrator \
+    iontest
 
 
 # Root
@@ -174,6 +175,20 @@ PRODUCT_PROPERTY_OVERRIDES := \
     ro.sf.hwrotation=270 \
     ro.opengles.version=131072 \
     persist.lab126.chargeprotect=1
+
+
+# Temporarily use prebuilt DOMX
+# Prebuilts /system/lib
+PRODUCT_COPY_FILES += \
+    device/amazon/otter/prebuilt/lib/libdomx.so:/system/lib/libdomx.so \
+    device/amazon/otter/prebuilt/lib/libmm_osal.so:/system/lib/libmm_osal.so \
+    device/amazon/otter/prebuilt/lib/libOMX.TI.DUCATI1.MISC.SAMPLE.so:/system/lib/libOMX.TI.DUCATI1.MISC.SAMPLE.so \
+    device/amazon/otter/prebuilt/lib/libOMX.TI.DUCATI1.VIDEO.CAMERA.so:/system/lib/libOMX.TI.DUCATI1.VIDEO.CAMERA.so \
+    device/amazon/otter/prebuilt/lib/libOMX.TI.DUCATI1.VIDEO.DECODER.secure.so:/system/lib/libOMX.TI.DUCATI1.VIDEO.DECODER.secure.so \
+    device/amazon/otter/prebuilt/lib/libOMX.TI.DUCATI1.VIDEO.DECODER.so:/system/lib/libOMX.TI.DUCATI1.VIDEO.DECODER.so \
+    device/amazon/otter/prebuilt/lib/libOMX.TI.DUCATI1.VIDEO.H264E.so:/system/lib/libOMX.TI.DUCATI1.VIDEO.H264E.so \
+    device/amazon/otter/prebuilt/lib/libOMX.TI.DUCATI1.VIDEO.MPEG4E.so:/system/lib/libOMX.TI.DUCATI1.VIDEO.MPEG4E.so \
+    device/amazon/otter/prebuilt/lib/libOMX_Core.so:/system/lib/libOMX_Core.so \
 
 
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
