@@ -19,7 +19,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <array name="lockscreen_targets_with_camera">
+<!--    <array name="lockscreen_targets_with_camera">
 	    <item>@drawable/ic_lockscreen_unlock</item>
 	    <item>@null</item>
 	    <item>@null</item>
@@ -31,11 +31,11 @@
 	    <item>@null</item>
 	    <item>@null</item>
 	    <item>@null</item>
-    </array>
+    </array> -->
 
     <!-- Defines the shutdown options shown in the reboot dialog. -->
-    <array name="shutdown_reboot_options" translatable="false">
+<!--    <array name="shutdown_reboot_options" translatable="false">
         <item>@string/reboot_reboot</item>
-    </array>
+    </array>-->
 
 </resources>
