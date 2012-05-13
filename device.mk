@@ -38,8 +38,10 @@ PRODUCT_AAPT_PREF_CONFIG := mdpi
 PRODUCT_PACKAGES += \
     lights.otter \
     libinvensense_mpl \
-    hwcomposer.omap4 \
     hwcomposer.default \
+    parse_hdmi_edid \
+    libedid \
+    hwcomposer.otter \
     audio.primary.omap4430 \
     audio_policy.default \
     libaudioutils \
